@@ -67,3 +67,12 @@ If you want to replicate my AWS practice, here’s the order I followed:
 ### Troubleshooting
 If you have connection issues when SSH-ing into your EC2 instance, see [`troubleshoot_notes`](troubleshoot_notes) for common causes and step-by-step checks.
 
+
+#### Pricing lookup (On‑Demand)
+
+Use the Pricing API to get On‑Demand hourly price and an estimated 750‑hour month:
+
+```bash
+./lookup_price.sh t3.micro "EU (London)" Linux
+```
+
