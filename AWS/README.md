@@ -41,3 +41,26 @@ This folder contains all AWS-specific learning and mini-projects I practiced.
 - `ssh_ec2.sh` — connects using saved IP and key.
 - `cleanup_ec2.sh` — terminates instance and cleans local files.
 
+## Quick Start Guide for AWS Practice
+
+If you want to replicate my AWS practice, here’s the order I followed:
+
+1. **Create AWS account** (AWS Console)  
+   - Enable MFA for the root account.
+
+2. **Create IAM admin user** (AWS Console)  
+   - Give `AdministratorAccess` policy and generate access keys.
+
+3. **Install & configure AWS CLI** (Local terminal)  
+   ```bash
+   aws configure
+   ```
+4. **EC2 CLI practice (Local terminal) — run scripts in this order:**
+
+  1. `create_security_group.sh` → creates/reuses an SSH-allowed security group for your IP.  
+  2. `launch_ec2.sh` → launches a Free Tier Amazon Linux EC2 instance.  
+  3. `ssh_ec2.sh` → connects to the instance via SSH.  
+  4. **When finished:** `cleanup_ec2.sh` → terminates the instance and cleans up.
+
+> ⚠️ Always run `cleanup_ec2.sh` after you finish to avoid charges.
+
