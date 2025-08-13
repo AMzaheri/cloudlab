@@ -64,3 +64,6 @@ If you want to replicate my AWS practice, here’s the order I followed:
 
 > ⚠️ Always run `cleanup_ec2.sh` after you finish to avoid charges.
 
+### Troubleshooting
+If you have connection issues when SSH-ing into your EC2 instance, see [`troubleshoot_notes`](troubleshoot_notes) for common causes and step-by-step checks.
+
