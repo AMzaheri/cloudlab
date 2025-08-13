@@ -57,10 +57,10 @@ If you want to replicate my AWS practice, here’s the order I followed:
    ```
 4. **EC2 CLI practice (Local terminal) — run scripts in this order:**
 
-  1. `create_security_group.sh` → creates/reuses an SSH-allowed security group for your IP.  
-  2. `launch_ec2.sh` → launches a Free Tier Amazon Linux EC2 instance.  
-  3. `ssh_ec2.sh` → connects to the instance via SSH.  
-  4. **When finished:** `cleanup_ec2.sh` → terminates the instance and cleans up.
+   - `create_security_group.sh` → creates/reuses an SSH-allowed security group for your IP.  
+   - `launch_ec2.sh` → launches a Free Tier Amazon Linux EC2 instance.  
+   - `ssh_ec2.sh` → connects to the instance via SSH.  
+   - **When finished:** `cleanup_ec2.sh` → terminates the instance and cleans up.
 
 > ⚠️ Always run `cleanup_ec2.sh` after you finish to avoid charges.
 
