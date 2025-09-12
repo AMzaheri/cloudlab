@@ -1,0 +1,73 @@
+# Most common causes for “Connection closed”
+
+## Confirm your IP is allowed in the Security Group
+
+Your public IP can change. We can re-read the current IP and make sure the SG has an SSH rule for it.
+
+```bash
+REGION=$(aws configure get region)
+SG_ID=$(cat cloudlab/AWS/cloudlab_sg_id.txt)
+MY_IP=$(curl -s https://checkip.amazonaws.com)
+
+echo "My IP: $MY_IP"
+aws ec2 describe-security-groups \
+  --group-ids "$SG_ID" \
+  --region "$REGION" \
+  --query "SecurityGroups[0].IpPermissions[?FromPort==\`22\` && ToPort==\`22\`].IpRanges[].CidrIp"
+```
+
+If you don’t see `"${MY_IP}/32"` in the output, just re-run the SG script in cloudlab/AWS:
+
+```bash
+./create_security_group.sh
+```
+
+## Confirm the instance’s current public IP, and that you’re using it
+
+Public IPs can change after stops/restarts.
+
+```bash
+INSTANCE_ID=$(cat cloudlab/AWS/cloudlab_instance_id.txt)
+PUBLIC_IP=$(aws ec2 describe-instances \
+  --instance-ids "$INSTANCE_ID" \
+  --region "$REGION" \
+  --query 'Reservations[0].Instances[0].PublicIpAddress' \
+  --output text)
+echo "Instance public IP: $PUBLIC_IP"
+cat cloudlab/AWS/cloudlab_public_ip.txt
+
+```
+If the two IPs differ, update the file:
+
+```bash
+echo "$PUBLIC_IP" > cloudlab_public_ip.txt
+```
+## Make sure the instance is actually using your SG
+
+```bash
+aws ec2 describe-instances \
+  --instance-ids "$INSTANCE_ID" \
+  --region "$REGION" \
+  --query 'Reservations[0].Instances[0].SecurityGroups[].GroupId'
+
+```
+Ensure the list contains your SG_ID.
+
+## Quick network probe to port 22
+
+This checks if SSH is reachable from a Mac.
+```bash
+PUBLIC_IP=$(cat cloudlab_public_ip.txt)
+nc -vz $PUBLIC_IP 22
+```
+
+You want something like succeeded! (open). If it times out or refuses, it’s a network/SG issue.
+
+## Verbose SSH (shows why it closes)
+
+```bash
+ssh -o StrictHostKeyChecking=accept-new -vvv -i ~/.ssh/cloudlab-key.pem ec2-user@$PUBLIC_IP
+
+```
+
+
