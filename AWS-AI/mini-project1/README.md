@@ -8,7 +8,7 @@ cloudlab/
     └── AWS-AI/
         └── mini-project1/
             ├── README.md
-            ├── `s3_etl.py`
+            ├── s3_etl.py
             ├── requirements.txt
             └── data/
                 └── sample.csv # (local test file)
