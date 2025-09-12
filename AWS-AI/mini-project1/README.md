@@ -3,7 +3,7 @@
 This project demonstrates data movement pattern for ML/AI on AWS: store a dataset in Amazon S3, download it locally (or to compute), run a small Python preprocessing step, and upload cleaned outputs back to S3.
 
 ## Project structure
-
+```
 cloudlab/
     └── AWS-AI/
         └── mini-project1/
@@ -12,23 +12,22 @@ cloudlab/
             ├── requirements.txt
             └── data/
                 └── sample.csv # (local test file)
+```
 
 ## Step-by-step guide
 
 **1. Create (or reuse) your S3 bucke**t
 
 Pick a globally unique bucket name:
-
 ```bash
 aws s3 mb s3://<your-bucket> --region eu-west-2
 ```
-2. (Recommended) Create a least-privilege IAM user for this project
+**2. (Recommended) Create a least-privilege IAM user for this project**
  
 This avoids using your admin key for day-to-day work. This script creates/updates:
 - a minimal S3 policy limited to your bucket + prefix
 - a dedicated IAM user
 - attaches the policy to the user
-
 ```bash
 ./scripts/setup_mp1_user.sh --bucket <your-bucket> --prefix aws-ai/mini-project1 --region eu-west-2
 ```
