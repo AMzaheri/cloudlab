@@ -37,7 +37,6 @@ Now manually create an access key for that new user (to keep secrets out of logs
 ```bash
 aws iam create-access-key --user-name cloudlab-mp1-user
 ```
-
 Copy the AccessKeyId and SecretAccessKey, then configure a new profile:
 
 ```bash
@@ -60,7 +59,6 @@ printf "id,name,plan\n1,Alice,Basic\n2,Bob,Pro\n2,Bob,Pro\n3, Carol ,Basic\n" > 
 export M1_BUCKET=<your-bucket>
 export M1_PREFIX=aws-ai/mini-project1
 ```
-
 If using the least-privilege profile:
 
 ```bash
@@ -70,7 +68,6 @@ AWS_PROFILE=mp1 python s3_etl.py \
   --key-prefix "$M1_PREFIX" \
   --local-csv data/sample.csv
 ```
-
 (Or, with your default/admin profile, omit AWS_PROFILE=mp1)
 
 **5. Verify outputs in S3**
@@ -89,14 +86,14 @@ aws s3 ls s3://$M1_BUCKET/$M1_PREFIX/processed/
 
 ## Cleanup summary
 
-To clean up S3 objects:
+-To clean up S3 objects:
 
 ```bash
 aws s3 rm s3://$M1_BUCKET/$M1_PREFIX --recursive
 ```
-Fits within Free Tier at this scale. Keep total storage small and avoid unnecessary re‑downloads.
+This fits within Free Tier at this scale. Keep total storage small and avoid unnecessary re‑downloads.
 
-To delete the IAM user/policy after you’re done:
+-To delete the IAM user/policy after you’re done:
 
 ```bash
 ./scripts/cleanup_mp1_user.sh --user cloudlab-mp1-user --policy-name CloudLabS3MiniProjAccess
