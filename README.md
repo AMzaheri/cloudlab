@@ -26,3 +26,14 @@ This project demonstrates a realistic ML/AI data flow on AWS:
 
 It also introduces **least-privilege IAM** practice, with shell scripts to create and clean up a dedicated project user and policy.
 
+### 2. Mini-project 2 — CLI-only ML on AWS (XGBoost + manual HPO, S3)
+
+Path: `AWS-AI/mini-project2/`  
+What: Train a small XGBoost model **from the CLI**, run a short manual HPO, and store artefacts/metrics in **Amazon S3** (Free-Tier friendly; no SageMaker jobs).
+
+This mini-project demonstrates:
+- CLI-driven ML workflow on AWS (local training; artefacts/metrics in Amazon S3)
+- Lightweight hyper-parameter search
+- Optional companion notebook to run the project
+- Cost-aware use of S3 prefixes for tidy artefacts
+
