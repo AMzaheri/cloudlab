@@ -1,0 +1,43 @@
+Here you can find usefult commands to check your S3 bucket status from your local terminal
+
+1. List all buckets you own
+```
+aws s3api list-buckets --query 'Buckets[].Name'
+```
+2. Does the specific bucket exist & are you allowed to use it?
+```
+BUCKET=<your-old-bucket-name>
+aws s3api head-bucket --bucket "$BUCKET" && echo "✅ Exists and you have access" || echo "❌ Not found or no access"
+
+```
+
+3. What region is it in? (keep it the same as your Studio/CLI region if possible)
+```
+aws s3api get-bucket-location --bucket "$BUCKET" --query 'LocationConstraint'
+# Note: returns null for us-east-1
+```
+
+4. What’s inside right now?
+```
+aws s3 ls s3://$BUCKET/ --human-readable --summarize
+
+```
+If the name was deleted and grabbed by someone else, head-bucket may show 403.
+
+5.Reusing it safely
+ 
+Any time you want to reuse an old bucket, create project-scoped prefixes so projects don’t step on each other: 
+```
+export S3_PREFIX=mini-project2
+aws s3api put-object --bucket "$BUCKET" --key "$S3_PREFIX/data/"
+aws s3api put-object --bucket "$BUCKET" --key "$S3_PREFIX/artifacts/"
+aws s3api put-object --bucket "$BUCKET" --key "$S3_PREFIX/metrics/"
+
+```
+Then set your env and run scripts against that prefix.
+
+ 6. To delete your project’s prefix:
+
+```
+aws s3 rm "s3://$BUCKET/$S3_PREFIX" --recursive
+```

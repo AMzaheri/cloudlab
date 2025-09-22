@@ -1,0 +1,16 @@
+# One-time AWS CLI setup (free-tier safe)
+
+# From local shell or the SageMaker Studio terminal:
+# 0) Set project env vars
+export AWS_REGION=eu-west-2           # or your region
+export PROJECT=mini-project2
+export BUCKET=cloudlab-$PROJECT-$RANDOM
+
+# 1) Create S3 bucket if it does not exist
+aws s3 mb s3://$BUCKET --region $AWS_REGION
+
+# 2) Create folder prefixes for clarity (optional)
+aws s3api put-object --bucket $BUCKET --key data/
+aws s3api put-object --bucket $BUCKET --key artifacts/
+aws s3api put-object --bucket $BUCKET --key metrics/
+
