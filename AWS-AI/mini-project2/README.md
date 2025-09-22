@@ -34,18 +34,20 @@ pip install -r requirements.txt
 - Python 3.10+ with `pip` (conda is fine)
 - An S3 bucket in **your chosen region** (e.g. `eu-west-2`)
 
-## How to rin
+## How to run
 
-### CLI-first (reusing an existing bucket)
+### CLI-driven ML workflow on AWS
 
--Use your existing bucket name: see cloudlab/AWS-AI/mini-project1/ to learn how to create s3 bucjets.
+1. **Set environment variables**
+ 
+Use your existing bucket name: see cloudlab/AWS-AI/mini-project1/ to learn how to create s3 bucjets.
 ```bash
 export BUCKET=<your-existing-bucket-name>
 export AWS_REGION=eu-west-2
 export PROJECT=mini-project2
 export S3_PREFIX=mini-project2
 ```
-**Create project prefixes:**
+Create project prefixes:
 
 ```bash
 aws s3api put-object --bucket "$BUCKET" --key "$S3_PREFIX/data/"
@@ -53,13 +55,13 @@ aws s3api put-object --bucket "$BUCKET" --key "$S3_PREFIX/artifacts/"
 aws s3api put-object --bucket "$BUCKET" --key "$S3_PREFIX/metrics/"
 ```
 
-**Train ML model (XGBoost, CPU):**
+2. **Train ML model (XGBoost, CPU):**
 
 ```bash
 python src/train_local.py
 ```
 
-**Run mini HPO:**
+3. **Run mini HPO:**
 
 ```bash
 python src/hpo_loop.py                           # runs 10 trials
@@ -67,7 +69,7 @@ python src/hpo_loop.py                           # runs 10 trials
 python src/hpo_loop.py --trials 5 --seed 123 --n-jobs 2
 ```
 
-**Inspect outputs**
+5. **Inspect outputs**
 
 ```bash
 aws s3 ls "s3://$BUCKET/$S3_PREFIX/metrics/"
