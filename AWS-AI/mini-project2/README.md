@@ -19,6 +19,7 @@ cloudlab/AWS-AI/mini-project2/
                 ├─ notebooks/ml_free_tier_xgb.ipynb
                 ├─ src/train_local.py
                 ├─ src/hpo_loop.py
+                ├─ src/s3_useful_commands	Useful S3 commands to check from your local terminal
                 └─ README.md
 ```
 
