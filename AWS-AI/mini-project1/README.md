@@ -16,7 +16,7 @@ cloudlab/
 
 ## Step-by-step guide
 
-**1. Create (or reuse) your S3 bucke**t
+**1. Create (or reuse) your S3 bucket**
 
 Pick a globally unique bucket name:
 ```bash
