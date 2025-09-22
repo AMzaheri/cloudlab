@@ -69,7 +69,7 @@ python src/hpo_loop.py                           # runs 10 trials
 python src/hpo_loop.py --trials 5 --seed 123 --n-jobs 2
 ```
 
-5. **Inspect outputs**
+**Inspect outputs**
 
 ```bash
 aws s3 ls "s3://$BUCKET/$S3_PREFIX/metrics/"
