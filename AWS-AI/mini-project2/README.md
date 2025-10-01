@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 1. **Set environment variables**
  
-Use your existing bucket name: see cloudlab/AWS-AI/mini-project1/ to learn how to create s3 bucjets.
+Use your existing bucket name: see cloudlab/AWS-AI/mini-project1/ to learn how to create s3 buckets.
 ```bash
 export BUCKET=<your-existing-bucket-name>
 export AWS_REGION=eu-west-2
