@@ -1,0 +1,7 @@
+boto3
+sagemaker
+scikit-learn
+numpy
+xgboost
+requests 
+requests-aws4auth
